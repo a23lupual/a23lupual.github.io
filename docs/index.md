@@ -14,7 +14,7 @@ Y posteriormente tendremos que intalar nginx:
 
 Para comprobar que la instalación se ha hecho de forma correcta y el servidor está activo introduciremos el siguiente comando
 
-![`systemctl status nginx`](../imagenes/systemctl.png)
+![`systemctl status nginx`](./assets/imagenes/fotos2.1/systemctl.png)
 
 Y si vemos que el estado del servidor es `runing` es que la instalación se ha hecho de forma correcta.
 
@@ -27,7 +27,7 @@ Todas estas se encontrarán en /var/www/; para esto vamos a crear una carpeta pa
 
 El nombre del dominio lo puedes elegir y dentro de la carpeta html tendrás que clonar el repositorio `https://github.com/cloudacademy/static-website-example` que será una página web de prueba para comprobar que funciona correctamente.
 
-![`git clone origin https://github.com/cloudacademy/static-website-example`](../imagenes/git_clone.png)
+![`git clone origin https://github.com/cloudacademy/static-website-example`](./assets/imagenes/fotos2.1/git_clone.png)
 
 Además tendremos que cambiar los permisos para que el servidor pueda acceder a dicha carpeta para mostrarla.
 
@@ -41,13 +41,13 @@ Y para cambiar los permisos:
 
 Si hemos hecho estos cambios al hacer `ls -la` deberia aparecer la carpeta con las siguientes propiedades:
 
-![`ls -la`](../imagenes/ls_la.png)
+![`ls -la`](./assets/imagenes/fotos2.1/ls_la.png)
 
 Para comprobar que el servidor está funcionando introducimos en la máquina anfitriona `http://IP-maq-virtual` Esto lo sabremos con el comando `ip a`.
 
 Deberiamos de ver algo asi:
 
-![`welcome`](../imagenes/welcom_nginx.png)
+![`welcome`](./assets/imagenes/fotos2.1/welcom_nginx.png)
 
 ## 2. Comprobaciones de servidor web NGINX
 
@@ -59,7 +59,7 @@ Para que se muestre en contenido de nuestra web debemos modificar el archivo `/e
 
 E introducimos el siguiente bloque:
 
-![cat config](../imagenes/cat_config.png)
+![cat config](./assets/imagenes/fotos2.1/cat_config.png)
 
 La ruta debe ser donde se encuentre el archivo index.html
 
@@ -95,7 +95,7 @@ Configuramos vsftpd para que este sea el directorio al cual vstpd cambia despues
 
 Creamos los certificados para conectarnos:
 
-!['sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem'](../imagenes/certificados.png)
+!['sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem'](./assets/imagenes/fotos2.1/certificados.png)
 
 En el siguiente archivo :
 
@@ -111,11 +111,11 @@ Borramos las siguientes líneas
 
 Y añadimos las siguientes
 
-![mod_claves](../imagenes/mod_claves.png)
+![mod_claves](./assets/imagenes/fotos2.1/mod_claves.png)
 
 Por último usamos un cliente FTP como Filezilla para acceder a los archivos de nuestro servido nginx.
 
-![Filezila](../imagenes/filezilla.png)
+![Filezila](./assets/imagenes/fotos2.1/filezilla.png)
 
 En el recuadro servidor introducimos la ip de la máquina debian, el nomber de usuario de la máquina la contraseña y el puerto que usaremos el 21.
 
