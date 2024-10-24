@@ -1,0 +1,633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://a23lupual.org/a23lupual/tarea2.3/">
+      
+      
+        <link rel="prev" href="../tarea2.2/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>PROXY INVERSO CON NGINX - a23lupual</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proxy-inverso-con-nginx" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="a23lupual" class="md-header__button md-logo" aria-label="a23lupual" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            a23lupual
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PROXY INVERSO CON NGINX
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="a23lupual" class="md-nav__button md-logo" aria-label="a23lupual" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    a23lupual
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SERVIDOR NGINX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea2.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2 – Autenticación en Nginx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PROXY INVERSO CON NGINX
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PROXY INVERSO CON NGINX
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-un-servidor-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. ¿Qué es un servidor Proxy?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ¿Qué es un servidor Proxy?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-beneficios-de-un-servidor-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Beneficios de un servidor Proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-beneficios-de-un-servidor-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Beneficios de un servidor Proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-configuracion-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CONFIGURACIÓN DEL SERVIDOR
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. CONFIGURACIÓN DEL SERVIDOR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-primero-necesitaremos-cambiar-el-nombre-de-la-web-por-el-de-webserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Primero necesitaremos cambiar el nombre de la web por el de webserver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nginx proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ccomprobaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. CCOMPROBACIONES
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anadiendo-cabeceras" class="md-nav__link">
+    <span class="md-ellipsis">
+      AÑADIENDO CABECERAS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-que-es-un-servidor-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. ¿Qué es un servidor Proxy?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ¿Qué es un servidor Proxy?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-beneficios-de-un-servidor-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Beneficios de un servidor Proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-beneficios-de-un-servidor-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Beneficios de un servidor Proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-configuracion-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CONFIGURACIÓN DEL SERVIDOR
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. CONFIGURACIÓN DEL SERVIDOR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-primero-necesitaremos-cambiar-el-nombre-de-la-web-por-el-de-webserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Primero necesitaremos cambiar el nombre de la web por el de webserver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-proxy-inverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nginx proxy inverso
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ccomprobaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. CCOMPROBACIONES
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anadiendo-cabeceras" class="md-nav__link">
+    <span class="md-ellipsis">
+      AÑADIENDO CABECERAS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="proxy-inverso-con-nginx">PROXY INVERSO CON NGINX</h1>
+<h2 id="1-que-es-un-servidor-proxy">1. ¿Qué es un servidor Proxy?</h2>
+<p>Un servidor Proxy es un intermediario entre el cliente y el servidor en ser un Proxy inverso, o un intermediario entre un servidor y el cliente siendo este un Proxy de reenvío.</p>
+<h3 id="12-beneficios-de-un-servidor-proxy-inverso">1.2. Beneficios de un servidor Proxy inverso</h3>
+<p>Un servidor Proxy nos va a aportar multitud de beneficios:</p>
+<ul>
+<li>
+<p>Con el podemos evitar restricciones de navegación estatales o institucionales: Hay ciertas instituciones o estados que no les interesa que accedamos a ciertos sitios de la red, nosotros al usar un servidor proxy y salir a la red a través de el podremos sortear dichas limitaciones.</p>
+</li>
+<li>
+<p>Bloquear acceso a ciertos sitios: De la misma forma dichas instituciones y estados usan dichos servidores para bloquear el acceso a distintos sitios, mediante filtros de contenido.</p>
+</li>
+<li>
+<p>Para proteger tu identidad en línea: Al colocar un servidor Proxy entre tu y la red, no sales a esta misma directamente si no a través del servidor; ya que al acceder a cualquier sitio web se hará con la dirección IP del servidor.</p>
+</li>
+</ul>
+<h3 id="13-beneficios-de-un-servidor-proxy-inverso">1.3. Beneficios de un servidor Proxy inverso</h3>
+<p>Como hemos dicho este es el servidor que se encuentra antes del servidor que desea conectarse el cliente.</p>
+<ul>
+<li>
+<p>Balanceo de Carga: Si un sitio web recibe muchas peticiones este puede redireccionar peticiones y varios Proxys encargarse de entregar dichas peticiones.</p>
+</li>
+<li>
+<p>Protección contra ataques: Al igual que anteriormente el servidor o servicio no se mostrará a la red con su dirección IP si no que lo hará a través de la dirección IP del servidor Proxy que lo precede, lo que dificultará un ataque directo al mismo.</p>
+</li>
+<li>
+<p>Almacenamiento en caché: Si un recurso es muy usado no hará que un cliente acceda directamente al servidor ya que el Proxy podrá almacenar dicho recurso para poder aumentar el rendimiento.</p>
+</li>
+<li>
+<p>Cifrado SSL: El servidor Proxy también se puede configurar para el cifrado y descifrado de la información de cada cliente, esto ayuda a aliviar carga del servidor origen.</p>
+</li>
+</ul>
+<h2 id="2-configuracion-del-servidor">2. CONFIGURACIÓN DEL SERVIDOR</h2>
+<p>Para poder hacer esto necesitaremos tener dos Servidores Debian, por eso necesitaremos clonar el servidor original; uno de estos se encargará de mostrar los recursos y el otro hará las veces de Proxy.</p>
+<p>Ahora en vez de hacer las peticiones al servidor original haremos estas al servidor proxy el cual nos redigirá al servidor.</p>
+<h3 id="21-primero-necesitaremos-cambiar-el-nombre-de-la-web-por-el-de-webserver">2.1. Primero necesitaremos cambiar el nombre de la web por el de webserver</h3>
+<p>Esto implica:</p>
+<ol>
+<li>
+<p>Cambiar el nombre del archivo de configuración de sitios disponibles para Nginx
+<img alt="systemctl status nginx" src="../assets/imagenes/fotos2.2/mv%20sites-available.png" /></p>
+<ul>
+<li>
+<p>Cambiar el nombre del sitio web dentreo de este archivo de configuracion
+<img alt="systemctl status nginx" src="../assets/imagenes/fotos2.2/archivo%20sites-availables.png" /></p>
+</li>
+<li>
+<p>Y borrar el link simbólico de la carpeta sites-enabled
+<img alt="systemctl status nginx" src="../assets/imagenes/fotos2.2/unlink.png" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>En el archivo de configuración del sitio web, en lugar de hacer que escuche al puerto 80 que escuche al 8080.</p>
+</li>
+<li>
+<p>Reiniciar Nginx.</p>
+</li>
+</ol>
+<h3 id="nginx-proxy-inverso">Nginx proxy inverso</h3>
+<p>Ahora cuando queramos acceder a <code>http://ejemplo-proxy</code>, nos reenviará a <code>http://webserver:8080</code> para esto tendermos que:</p>
+<ul>
+<li>
+<p>Crear un archivo de configuración en <code>sites-available</code> con el nombre <code>ejemplo-proxy</code></p>
+</li>
+<li>
+<p>Este tendrá la siguiente configuración.</p>
+</li>
+</ul>
+<p><img alt="systemctl status nginx" src="../assets/imagenes/fotos2.2/config%20ejemplo-proxy.png" /></p>
+<ul>
+<li>Pondremos que escuche al puerto 80.</li>
+<li>El nombre que le hayamos puesto al servidor</li>
+<li>Y la directiva <code>prox_pass</code> será el lugar al que nos redigirá en el que habrá que poner <code>http://IP_server:puerto</code>.</li>
+<li>Crear un enlace simbolico del archivo de configuración <code>webserver-proxy</code> en <code>sites-enabled</code>.
+<img alt="alt text" src="../assets/imagenes/fotos2.2/encace-simbolico.png" /></li>
+</ul>
+<h2 id="3-ccomprobaciones">3. CCOMPROBACIONES</h2>
+<ul>
+<li>Comprobad además la petición y respuesta con las herramientas de desarrollador de Firefox en Xubuntu. Pulsando F12 en el navegador os aparecerán estas herramientas</li>
+</ul>
+<p><img alt="alt text" src="../assets/imagenes/fotos2.2/comprobaciones.png" /></p>
+<h2 id="anadiendo-cabeceras">AÑADIENDO CABECERAS</h2>
+<p>Para comprobar donde se conecta crearemos una cabecera con el nombre del Host, esto lo haremso añadiendo <code>add_header Host nombre_del_host;</code> esto lo haremos dentro del archivo de configuración en la parte <code>location / {...}</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
