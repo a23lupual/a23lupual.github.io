@@ -23,4 +23,5 @@ Para esta práctica vamos a necesitar el proxy inverso de la práctica anteior, 
 
 ## 3. CONFIGURACIONES
 
-!!! warning "Atencion"
+Primero necesitamos desenlazar la carpeta con la web que teniamos previamente `/etc/nginx/sites-enabled` y ejecutar `unlink nombre-archivo`.
+
