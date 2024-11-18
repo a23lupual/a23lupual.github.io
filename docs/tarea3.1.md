@@ -72,6 +72,50 @@ Accedemos al archivo `/opt/tomcat/apache-tomcat/conf/tomcat-users.xml` y añadim
 
 Para esta práctica usaremos el usuario "usuario" y de contraseña "usuario"
 
+Ahora buscaremos `http://localhost:8080/admin` y si lo hemos hecho bien nos pedirá que nos autenticamos
+
+![](./assets/imagenes/fotos3.1/autenticacion.png)
+
+Y veremos la página de admin
+
+![](./assets/imagenes/fotos3.1/pagina-admin.png)
+
+
+Por último desplegaremos una aplicación `.war` desde la página `http://localhost:8080/manager` la desplegaremos desde aquí
+
+![](./assets/imagenes/fotos3.1/desplegar.png)
+
+Aquí eligiremos el archivo `.war` y una vez despleado podremos acceder como un archivo normal
+
+![](./assets/imagenes/fotos3.1/desplegado.png)
+
+## 5. Despliege con MAVEN
+
+1. Para hacer un despliegue con Maven primero actualizaremos los repositorios con `sudo apt update` e intalaremso wget `sudo apt install wget -y`
+
+2. Instalamos Apache Maven 
+
+![](./assets/imagenes/fotos3.1/instalacionMaven.png)
+
+Para poder usar maven con tomcat tenemos que asegurarnos que añadimos todos los usuarios necesarios para que maven pueda hacer este despliege esto significa que maven tenga el permiso de `manager-script`; para esto añadimos las siguientes líneas.
+
+````xml
+<role rolename="admin"/>
+<role rolename="admin-gui"/>
+<role rolename="manager"/>
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<user username="admin" password="admin" roles="admin,admin-gui,manager,manager-gui"/>
+<user username="manager" password="manager" roles="manager-script"/>
+````
+
+Una vez configurado el archivo setting.xml de tomcat debemos configurar el archivo `/etc/maven/settings.xml`
+donde añadiremos las siguiente líneas 
+
+![](./assets/imagenes/fotos3.1/configuracion-maven.png)
+
+
+
 
 
 
