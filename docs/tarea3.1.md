@@ -115,7 +115,12 @@ donde añadiremos las siguiente líneas
 ![](./assets/imagenes/fotos3.1/configuracion-maven.png)
 
 
+## 6. despliegue
 
+Ahora para probar que hemos configurado todo bien, vamos a probar a desplegar una aplicación Java de prueba, para ver si podemos desplegarla sobre la arquitectura, lo haremos con el siguiente comando:
 
+![`mvn archetype:generate -DgroupId=raul -DartifactId=war-deploy -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false`](./assets/imagenes/fotos3.1/app-java.png)
+
+P
 
 
