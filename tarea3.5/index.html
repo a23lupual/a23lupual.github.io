@@ -1,0 +1,827 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://a23lupual.org/a23lupual/tarea3.5/">
+      
+      
+        <link rel="prev" href="../tarea3.4/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Tarea 3.5: Despliegue de una aplicación Flask (Python) - a23lupual</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tarea-35-despliegue-de-una-aplicacion-flask-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="a23lupual" class="md-header__button md-logo" aria-label="a23lupual" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            a23lupual
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tarea 3.5: Despliegue de una aplicación Flask (Python)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="a23lupual" class="md-nav__button md-logo" aria-label="a23lupual" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    a23lupual
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SERVIDOR NGINX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea2.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2 – Autenticación en Nginx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea2.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PROXY INVERSO CON NGINX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea2.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BALANCEO DE CARGA CON PROXY INVERSO EN NGINX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea2.5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practica 2.5 - Proxy inverso y balanceo de carga con SSL en NGINX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea3.1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PRACTICA 3.1.- INSTALACIÓN DE TOMCAT Y MAVEN PARA DESPLIEGUE DE APLICACIÓN JAVA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea3.2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practica 3.2: Despliegue de aplicaciones con Node Express
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea3.4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practica 3.4: Despliegue de una aplicacion React en Netlify
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Tarea 3.5: Despliegue de una aplicación Flask (Python)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Tarea 3.5: Despliegue de una aplicación Flask (Python)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es un framework?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gunicorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gunicorn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestor-de-paquetes-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestor de paquetes pip
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestor de paquetes pip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entornos-virtuales-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entornos virtuales en Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipenv
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedimiento-completo-para-el-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento completo para el Despliegue
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Procedimiento completo para el Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-gunicorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de Gunicorn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es un framework?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gunicorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gunicorn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestor-de-paquetes-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestor de paquetes pip
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestor de paquetes pip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entornos-virtuales-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entornos virtuales en Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipenv
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedimiento-completo-para-el-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedimiento completo para el Despliegue
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Procedimiento completo para el Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-gunicorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de Gunicorn
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="tarea-35-despliegue-de-una-aplicacion-flask-python">Tarea 3.5: Despliegue de una aplicación Flask (Python)</h1>
+<h2 id="prerequisitos">Prerequisitos</h2>
+<p><strong>Servidor Debian con los siguientes paquetes instalados:</strong></p>
+<ul>
+<li>Nginx</li>
+<li>Gunicorn</li>
+<li>Pipenv</li>
+</ul>
+<p>Estas instalacioes se podrán hacer con <code>sudo apt install &lt;paquete&gt;</code></p>
+<h2 id="introduccion">Introducción</h2>
+<h3 id="que-es-un-framework">¿Qué es un framework?</h3>
+<p>Un framework es un entorno de desarrollo que normalmente está especializado al lenguaje de programación que se está usando, en el caso de Python el más conocido es Django pero en nuestro caso usaremos, Flask ya que su curva de aprendizaje no es tan grande y se pueden hacer grandes aplicaciones, por otra parte para PHP tenemos Symphony, y para Ruby está Ruby on Rails.</p>
+<h3 id="flask">Flask</h3>
+<p>Hoy en dia hay muchas opciones para hacer aplicaciones web(PHP, JAVA), y en este caso Flask nos permite esto con Python.</p>
+<p>Flask se dice que es un "micro" framework ya que en un principio solo se instalan las funcionalidades básicas para crear una página web, pero que se pueden añadir con plugins para Flask.</p>
+<p>Flask utiliza el patron MVC (modelo - vista - controlador) este patron diferencia la base de datos o datos (modelo), del html (vista) y JavaScript y peticiones a BBDD (controlador).</p>
+<h3 id="gunicorn">Gunicorn</h3>
+<p>Cuando se implenta una aplicación web basada en Python, se tienen estas tres piezas:</p>
+<ul>
+<li>Servidor web(Nginx, Apache).</li>
+<li>Servidor de aplicaciones WSGI(Gunicorn, uWSGI, mod_wsgi, Waitress).</li>
+<li>Aplicación Web(Django, Flask, Pyramid, FastAPI).</li>
+</ul>
+<p>Los servidores web procesan y distribuyen las peticiones de navegadores y clientes, WSGI(Web Server Gateway Interface), proporcionan un conjunto de reglas y para el comportamiento y comunicación entre el servidor y las aplicaciones.</p>
+<p>Gunicorn(Green Unicorn) es un servidor WSGI, que se encuentra entre el servidor web y su aplicación web. Este se encarga entre la comunicación entre estos traduciendo ordenes y peticiones.</p>
+<h2 id="gestor-de-paquetes-pip">Gestor de paquetes <code>pip</code></h2>
+<p><code>pip</code> es el comando para instalar paquetes de Python, automatizando la conexión al sitio https://pypi.org/, descarga y la compilación del módulo.</p>
+<h3 id="entornos-virtuales-en-python">Entornos virtuales en Python</h3>
+<p>Un entorno virtual te permite tener múltiples instancias del interprete de Python, cada una configurada de diferente manera con distintos paquetes.</p>
+<p>De esta manera nos permite instalar paquetes de forma local en un entorno con <code>pip</code>.</p>
+<h3 id="pipenv">Pipenv</h3>
+<p>Este permite crear y mantener un entorno virtual para tus proyectos, agregando/borrando paquetes desde Pipfile; generando el archivo <code>Pipfile.lock</code>.</p>
+<h2 id="procedimiento-completo-para-el-despliegue">Procedimiento completo para el Despliegue</h2>
+<ol>
+<li>Instalamos el gestor de paquetes de Python</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/instal_pip.png" /></p>
+<ol>
+<li>Instalamos el paquete <code>pipenv</code> para gestionar los entornos virtuales:</li>
+</ol>
+<p><img alt="" src="./assets/imagenes/fotos3.5/install_pipenv.png.png" /></p>
+<ol>
+<li>Y comprobamos que está isntalado correctamente mostrando su versión:</li>
+</ol>
+<p><code>pipenv --version</code></p>
+<ol>
+<li>Creamos el directorio en el que almacenaremos nuestro proyecto:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/mkdir.png" /></p>
+<ol>
+<li>Al crearlo con <code>sudo</code>, los permisos pertenecen a root:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/permisos.png" /></p>
+<ol>
+<li>Hay que cambiarlo para que el dueño sea nuestro usuario (<code>nombre-debian</code>) y pertenezca al grupo <code>www-data</code>, el usuario usado por defecto por el servidor web para correr:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/cambio_permisos.png" /></p>
+<ol>
+<li>Estableceremos los permisos adecuados a este directorio, para que pueda ser leído todo el mundo:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/chmod.png" /></p>
+<ol>
+<li>Dentro del directorio de nuestra aplicación, creamos un archivo oculto <code>.env</code> que contendrá la variables de entorno necesarias:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/touch.png" /></p>
+<ol>
+<li>Editamos el archivo y añadimos las variables, indicando cuál es el archivo <code>.py</code> de la aplicación y el entorno, que en nuestro caso será producción:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/nano_env.png" /></p>
+<ol>
+<li>Inicamos ahora nuestro entrono virtual. <code>Pipenv</code> cargará las variables de entorno desde el fichero <code>.env</code> de forma automática:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/pipenv_shell.png" /></p>
+<ol>
+<li>Usamos <code>pipenv</code> para instalar las dependencias necesarias para nuestro proyecto:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/pipenv_install.png" /></p>
+<ol>
+<li>Ahora para comprobar que nuestra aplicación funciona adecuadamente, crearemos la aplicación más secilla con Flask. El archivo con la aplicación será <code>application.py</code> y la que se encargará de iniciarla será <code>wsgi.py</code>:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/applicationPy.png" />
+<img alt="" src="../assets/imagenes/fotos3.5/wsgiPy.png" /></p>
+<ol>
+<li>Ahora comprobamos nuestra aplicación a modo de comprobación con el servidor Flask integrado.</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/flaskRun.png" /></p>
+<ol>
+<li>Ahora podremos desde nuestra máquina anfitriona, introducir <code>http://IP-maq-virtual:5000</code>:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/aplicacionCorriendo.png" /></p>
+<h3 id="comprobacion-de-gunicorn">Comprobación de Gunicorn</h3>
+<ol>
+<li>Comprobemos ahora que funciona Gunicorn funciona. Si ha funcionado con Flask con el siguiente comando podemos comprobar que funciona con Gunicorn.</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/gunicorn.png" /></p>
+<ol>
+<li>Debemos comprobar con el comando <code>which gunicorn</code> cual es el path desde el que se ejecuta gunicorn:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/ruta_gunicorn.png" /></p>
+<ol>
+<li>Como ya tenemos Nginx lo iniciamos:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/start_nginx.png" /></p>
+<ol>
+<li>Ya fuera de nuestro entorno virtual, crearemos un archivo para que systemd corra Gunicorn como un servicio del sistema más:</li>
+</ol>
+<p><img alt="" src="../assets/imagenes/fotos3.5/flask_app_service.png" /></p>
+<ol>
+<li>Ahora habilitamos y </li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
