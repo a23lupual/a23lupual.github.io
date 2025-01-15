@@ -128,5 +128,23 @@ Este permite crear y mantener un entorno virtual para tus proyectos, agregando/b
 
 ![](./assets/imagenes/fotos3.5/flask_app_service.png)
 
-5. Ahora habilitamos y 
+5. Ahora habilitamos e iniciamos el servicio
 
+``systemctl enable nombre_servicio``
+``systemctl start nombre_servicio``
+
+6. Creamos un archivo con el nombre de nuestra aplicación en el que se establecerá la configuración del sitio, por esto se encontrará en `/etc/nginx/sites-available/nombre_aplicacion`.
+
+![](./assets/imagenes/fotos3.5/sites-available.png)
+
+7. Ahora deberemos crear un enlace simbólico a `sites-enabled`:
+
+![](./assets/imagenes/fotos3.5/ls.png)
+
+8. Comprobamos la configuración de NGINX y comprobamos que el estado sea activo:
+
+![](./assets/imagenes/fotos3.5/ls.png)
+
+9. Ahora accederemos a nuestra página está siendo servida por Gunicorn y Nginx, por lo que necesitaremos editar el archivo `/etc/hosts` de nuestra máquina para que asocie la IP de la máquina a nuestro ``server_name``:
+
+10. Por último deberemos comprobar que todo ha ido bien accediendo a nuestra página con `http://nombre_aplicacion` o `http://www.nombre_aplicacion`:
