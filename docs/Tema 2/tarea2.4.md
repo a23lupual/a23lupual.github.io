@@ -55,7 +55,7 @@ server {
     server_name webserver1 www.webserver1;
 
     root /var/www/webserver1/html;
-    index index.html index.htm;
+    index index.md index.htm;
 
     location / {            
             add_header Host servidor_web1_a23lupual;
@@ -95,7 +95,7 @@ server {
         server_name webserver2 www.webserver2;
 
         root /var/www/webserver2/html;
-        index index.html index.htm;
+        index index.md index.htm;
 
         location / {
                 add_header Host servidor_web2_a23lupual;
