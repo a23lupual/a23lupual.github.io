@@ -104,6 +104,8 @@ docker compose up -d
 ````
 Y como podemos ver docker ya empieza a descargar las imagenes
 
+![](../assets/imagenes/fotos6.3/run.png)
+
 ### Despliegue con Docker de PHP + Apache con autenticación LDAP
 
 - Creamos un directorio que se llame Practica 6.3 - PHP
@@ -169,6 +171,8 @@ docker build \
 -f ./Docker/Dockerfile \
 .
 ````
+
+![](../assets/imagenes/fotos6.3/build.png)
 - Una vez creada la imagen ejecutaremos el contenedor indicando las credenciales de nuestra cuenta LDAP mediante variables de entorno con la flag -e. Para este caso, vamos a probar un servidor LDAP externo.
 ````
 docker run \
@@ -180,3 +184,5 @@ docker run \
 docker-ldap
 ````
 - No nos queda más que ir a http://IP-Máq-Debian:3000/demo. Si todo ha ido bien, nos solicitará nuestras credenciales para iniciar sesion.
+
+![](../assets/imagenes/fotos6.3/inicio.png)

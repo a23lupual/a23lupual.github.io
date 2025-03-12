@@ -331,7 +331,7 @@ docker ps -a
 
 6. Verificación de conexión a la base de datos
 
-![imagen](../assets/imagenes/fotos6.2/-d.png)
+![imagen](../assets/imagenes/fotos6.2/hola_php.png)
 
 Si ahora intentasemos acceder a la dirección de nuesta maquina, deberiamos de obtener la siguiente pantalla:
 
