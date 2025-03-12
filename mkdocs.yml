@@ -1,21 +1,19 @@
 site_name: a23lupual
 site_url: https://a23lupual.org/a23lupual
 theme:
-  name: "material"
-
+  name: material
   palette:
-
-
-
-    # Palette toggle for light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/toggle-switch
-        name: Switch to dark mode
-
-    # Palette toggle for dark mode
-    - scheme: slate
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to light mode
-  
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
