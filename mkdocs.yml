@@ -1,5 +1,3 @@
-site_name: a23lupual
-site_url: https://a23lupual.org/a23lupual
 theme:
   name: material
   palette:
@@ -18,12 +16,5 @@ theme:
         icon: material/weather-sunny
         name: Cambiar a modo claro
   features:
-    - navigation.tabs
     - navigation.path  # Muestra migas de pan
     - navigation.top   # Botón "Volver arriba"
-  markdown_extensions:
-    - pymdownx.highlight
-    - pymdownx.inlinehilite
-    - pymdownx.superfences
-  extra:
-    generator: false  # Oculta la firma de mkdocs en el footer
